@@ -5,9 +5,10 @@ A Quiz application where you can test your knowledge in physics and will show yo
 
 
 <b>Description:</b> A quiz designed to test students on their knowledge of physics.
-Allows users to answer questions, calculate scores, and view results.
-Utilized JSON objects to store question and answers; and a scoring algorithm to tabulate results
-Implemented user interface in Materialize CSS framework; using flat color schemes, grid layouts, and Material design principles. App is cross-browser compatible and mobile responsive
+<li>Allows users to answer questions, calculate scores, and view results.</li>
+<li>Utilized JSON objects to store question and answers; and a scoring algorithm to tabulate results</li>
+<li>Implemented user interface in Materialize CSS framework; using flat color schemes, grid layouts, and Material design principles.</li> 
+<li>App is cross-browser compatible and mobile responsive.</li>
 
 ##Screen Shot
 
