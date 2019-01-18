@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+   
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/css/materialize.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/js/materialize.min.js"></script>
+
+
+    <style type="text/css">
+
+      h1 {
+        font-size:34px;
+      }
+      h2 {
+        font-size:25px;
+      }
+      #quiz {
+        display:none;
+      }
+      #btnNext {
+        display:none;
+      }
+      #startQ {
+        padding-top:20px; 
+      }
+      
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1> Let's Do a Quiz! </h1>
+      <p> 
+        How much you know about Physics? 
+      </p>
+      <p>
+        <button id="btnShowQuiz" class="btn"> Start Quiz</button>
+      </p>
+
+      <div class="divider"></div>
+    
+      <!-- quiz section -->
+      <div id="quiz">
+        <h2 id="question"></h2>
+        <p>
+          <label>
+            <input type="radio" name="answer" value="a" class="with-gap">
+              <span id="answer1"></span>
+          </label>
+        </p>
+        <p>
+          <label>
+            <input type="radio" name="answer" value="b" class="with-gap">
+              <span id="answer2"></span>
+          </label>
+        </p>
+
+        <!-- optional: show a progress bar -->
+        <div class="progress">
+          <div id="progressBar" class="determinate" style="width:0%"></div>
+        </div>
+
+        <button id="btnNext" class="btn"> Next </button>
+      </div> <!-- results -->
+  
+      <!-- quiz results go here -->
+      <div id="results"></div>
+
+    </div> <!--//container -->
+    
+
+    <!--------- JAVASCRIPT CODE  --------->
+    
+
+    <script src="index.js"></script>
+    <script type="text/javascript">
+      
+
+      // tracker variables
+      var curr = 0;
+      var correct = 0;
+      var wrong = 0;
+
+
+      function resetUI() {
+        // reset progress bar
+        document.getElementById("progressBar").style.width="0%";
+
+        // reset text of button to say "START QUIZ"
+        document.getElementById("btnShowQuiz").innerHTML = "Start Quiz"
+
+        // hide the results section 
+        document.getElementById("results").innerHTML = "";
+      }
+
+      function startQuiz() {
+        // reset all the UI
+        resetUI();
+
+        // show the quiz section & next button
+        document.getElementById("quiz").style.display="block";
+        document.getElementById("btnNext").style.display="block";
+
+        // show the first question
+        showQuestion();
+      }
+
+      function showQuestion() {
+        // 1. get question from question bank
+        var item = questionBank[curr];
+
+        // 2. show question in webpage
+        document.getElementById("question").innerHTML = item["question"];
+
+        // 3. show answer choices in radio buttons
+        document.getElementById("answer1").innerHTML = item["answers"]["a"];
+        document.getElementById("answer2").innerHTML = item["answers"]["b"];
+        
+      }
+      
+      function nextQuestion() {
+        // 1.  Check if answer is correct?
+
+        // get the radio button the person selected
+        var userAnswer = document.querySelector('input[name="answer"]:checked').value;
+        console.log(userAnswer);
+
+        // check if the person's selection matches the
+        // actual answer
+        var actual = questionBank[curr]["correct"];
+        console.log(actual);
+
+        if (userAnswer == actual) {
+          correct = correct + 1;
+        }
+        else {
+          wrong = wrong + 1;
+        }
+
+
+        // 2.  Check if we should show the next question?
+
+        // increase the counter;
+        curr = curr + 1;
+        
+        //@UI nonsense - update the progress bar
+        var step =  100 / questionBank.length 
+        var progress = curr * step;
+        document.getElementById("progressBar").style.width=progress+"%";
+
+        //@UI nonsense - reset radio buttons
+        var radioButtons = document.getElementsByName("answer");
+        radioButtons.forEach(function(radio){
+          radio.checked = false;
+        });
+        
+        //@LOGIC - check if we should show the next question
+        if (curr == questionBank.length) {
+          // end the quiz & show the score
+
+          // show results
+          document.getElementById("results").innerHTML = 
+              "<h2> Score </h2>" 
+            + "<p>"
+            + "Correct: " + correct + " <br>"  
+            + "Wrong: " + wrong
+            + "</p>"
+
+          // disable the next button
+          document.getElementById("btnNext").style.display = "none";
+          
+          // show the restart button
+          document.getElementById("btnShowQuiz").innerHTML = "Restart Quiz";
+
+          // reset counters
+          curr = 0;
+          correct = 0;
+          wrong = 0;
+         
+        }
+        else {
+          // show next question
+          showQuestion();
+        }
+      }      
+      
+      //-- click handlers
+
+      // start quiz button
+      document.getElementById("btnShowQuiz").addEventListener("click", startQuiz);
+
+      // next button
+      var next = document.getElementById("btnNext");
+      next.addEventListener("click", nextQuestion);
+
+
+    </script>
+  </body>
+</html>
