@@ -10,7 +10,8 @@ A Quiz application where you can test your knowledge in physics and will show yo
 <li>Implemented user interface in Materialize CSS framework; using flat color schemes, grid layouts, and Material design principles.</li> 
 <li>App is cross-browser compatible and mobile responsive.</li>
 
-##Screen Shot
+
+## Screen Shot
 
 <img src="screenshot/Screenshot-1.png" width="800">
 <img src="screenshot/Screenshot-2.png" width="800">
