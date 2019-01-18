@@ -11,7 +11,7 @@ Implemented user interface in Materialize CSS framework; using flat color scheme
 
 ##Screen Shot
 
-<img src="screenshots/Screenshot-1.png" width="800">
-<img src="screenshots/Screenshot-2.png" width="800">
-<img src="screenshots/Screenshot-3.png" width="800">
-<img src="screenshots/Screenshot-4.png" width="800">
+<img src="screenshot/Screenshot-1.png" width="800">
+<img src="screenshot/Screenshot-2.png" width="800">
+<img src="screenshot/Screenshot-3.png" width="800">
+<img src="screenshot/Screenshot-4.png" width="800">
